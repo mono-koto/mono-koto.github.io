@@ -12,6 +12,11 @@
       rel="stylesheet"
     />
     <style>
+      #bg {
+        position: absolute;
+        top: 0;
+        left: 0;
+      }
       .container {
         display: flex;
         position: absolute;
@@ -21,8 +26,12 @@
         left: 0;
       }
       .content {
-        text-align: center;
+        color: #03045e;
+        z-index: 10;
         margin: auto;
+      }
+      canvas {
+        display: block;
       }
       html,
       body {
@@ -31,11 +40,74 @@
     </style>
   </head>
   <body>
+    <div id="bg"></div>
     <div class="container">
       <div class="content">
         <strong>Mono Koto</strong>
-        <br />Design & Technology<br />info@mono-koto.com
+        <br />technology and innovation consulting <br />info@mono-koto.com
       </div>
     </div>
+    <script src="https://cdn.jsdelivr.net/npm/p5@1.4.0/lib/p5.js"></script>
+    <script>
+      const container = document.getElementById("bg");
+      const s = (p) => {
+        const colors = ["#0077b6", "#00b4d8", "#90e0ef", "#caf0f8"];
+        const stars = new Array();
+        for (let i = 0; i < 800; i++) {
+          stars.push({
+            radius: Math.random(),
+            x: Math.random(),
+            y: Math.random(),
+            alpha: Math.random(),
+            v: Math.random(),
+            c: Math.floor(Math.random() * colors.length),
+          });
+        }
+        stars.push({
+          radius: Math.random() / 2 + 0.5,
+          x: Math.random(),
+          y: Math.random(),
+          alpha: Math.random() / 2 + 0.5,
+          v: Math.random() / -2 - 0.5,
+          c: -1,
+        });
+
+        p.setup = function () {
+          p.createCanvas(p.windowWidth, p.windowHeight);
+          p.noStroke();
+        };
+
+        p.draw = function () {
+          p.background(245);
+          stars.forEach((s) => {
+            const r = s.radius * 20;
+            const v = 0.0001 + s.v / 1500;
+            let color;
+            if (s.c >= 0) {
+              color = p.color(colors[s.c]);
+              // color.alpha = s.alpha / 100;
+              color.setAlpha(s.alpha * 255);
+            } else {
+              color = p.color("#ff0000");
+              color.setAlpha(s.alpha * 255);
+            }
+
+            p.fill(color);
+            p.circle(s.x * p.width, s.y * p.height, r);
+            s.y += v;
+            if (s.v >= 0 && s.y > 1.01) {
+              s.y = -0.01;
+            } else if (s.v < 0 && s.y < 0) {
+              s.y = 1.01;
+            }
+          });
+        };
+
+        p.windowResized = function () {
+          p.resizeCanvas(p.windowWidth, p.windowHeight);
+        };
+      };
+      new p5(s, container);
+    </script>
   </body>
 </html>
