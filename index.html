@@ -26,10 +26,16 @@
         left: 0;
       }
       .content {
-        color: #03045e;
+        /* background-color: #ffa62b; */
         z-index: 10;
+        color: #16697a;
+        padding: 10px;
         margin: auto;
       }
+      a {
+        color: #489fb5;
+      }
+
       canvas {
         display: block;
       }
@@ -44,16 +50,26 @@
     <div class="container">
       <div class="content">
         <strong>Mono Koto</strong>
-        <br />technology and innovation consulting <br />info@mono-koto.com
+        <br />Design & Technology Consulting <br /><a
+          href="mailto:info@mono-koto.com"
+          >info@mono-koto.com</a
+        >
       </div>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/p5@1.4.0/lib/p5.js"></script>
     <script>
       const container = document.getElementById("bg");
       const s = (p) => {
-        const colors = ["#0077b6", "#00b4d8", "#90e0ef", "#caf0f8"];
+        const colors = ["#16697a", "#489fb5", "#82c0cc"];
         const stars = new Array();
-        for (let i = 0; i < 800; i++) {
+        const maxStars = 800;
+        let numStars = 800;
+
+        updateNumStars = function () {
+          numStars = Math.round(maxStars * Math.min(1, p.width / 1280));
+        };
+
+        for (let i = 0; i < maxStars; i++) {
           stars.push({
             radius: Math.random(),
             x: Math.random(),
@@ -63,11 +79,11 @@
             c: Math.floor(Math.random() * colors.length),
           });
         }
-        stars.push({
-          radius: Math.random() / 2 + 0.5,
+        stars.unshift({
+          radius: Math.random() / 2 + 0.75,
           x: Math.random(),
           y: Math.random(),
-          alpha: Math.random() / 2 + 0.5,
+          alpha: 1,
           v: Math.random() / -2 - 0.5,
           c: -1,
         });
@@ -75,11 +91,14 @@
         p.setup = function () {
           p.createCanvas(p.windowWidth, p.windowHeight);
           p.noStroke();
+          p.pixelDensity(1);
+          updateNumStars();
         };
 
         p.draw = function () {
-          p.background(245);
-          stars.forEach((s) => {
+          p.background("#ede7e3");
+          for (let i = 0; i < numStars; i++) {
+            const s = stars[i];
             const r = s.radius * 20;
             const v = 0.0001 + s.v / 1500;
             let color;
@@ -88,7 +107,7 @@
               // color.alpha = s.alpha / 100;
               color.setAlpha(s.alpha * 255);
             } else {
-              color = p.color("#ff0000");
+              color = p.color("#ffa62b");
               color.setAlpha(s.alpha * 255);
             }
 
@@ -100,11 +119,12 @@
             } else if (s.v < 0 && s.y < 0) {
               s.y = 1.01;
             }
-          });
+          }
         };
 
         p.windowResized = function () {
           p.resizeCanvas(p.windowWidth, p.windowHeight);
+          updateNumStars();
         };
       };
       new p5(s, container);
