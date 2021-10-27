@@ -26,14 +26,14 @@
         left: 0;
       }
       .content {
-        /* background-color: #ffa62b; */
         z-index: 10;
-        color: #16697a;
         padding: 10px;
         margin: auto;
+        font-size: 1.2em;
+        filter: drop-shadow(3px 0px 1px #1d3557);
       }
-      a {
-        color: #489fb5;
+      .content, a {
+        color: #f1faee;
       }
 
       canvas {
@@ -60,7 +60,9 @@
     <script>
       const container = document.getElementById("bg");
       const s = (p) => {
-        const colors = ["#16697a", "#489fb5", "#82c0cc"];
+        const colors = ["#e63946","#f1faee","#a8dadc","#457b9d","#1d3557"];
+        const contrastColor = colors.shift();
+        const bgColor = colors.pop();
         const stars = new Array();
         const maxStars = 800;
         let numStars = 800;
@@ -79,8 +81,9 @@
             c: Math.floor(Math.random() * colors.length),
           });
         }
+
         stars.unshift({
-          radius: Math.random() / 2 + 0.75,
+          radius: Math.random() + .8,
           x: Math.random(),
           y: Math.random(),
           alpha: 1,
@@ -96,27 +99,26 @@
         };
 
         p.draw = function () {
-          p.background("#ede7e3");
+          p.background(bgColor);
           for (let i = 0; i < numStars; i++) {
             const s = stars[i];
-            const r = s.radius * 20;
+            const r = s.radius * 30;
             const v = 0.0001 + s.v / 1500;
             let color;
             if (s.c >= 0) {
               color = p.color(colors[s.c]);
-              // color.alpha = s.alpha / 100;
               color.setAlpha(s.alpha * 255);
             } else {
-              color = p.color("#ffa62b");
+              color = p.color(contrastColor);
               color.setAlpha(s.alpha * 255);
             }
 
             p.fill(color);
             p.circle(s.x * p.width, s.y * p.height, r);
             if (s.v >= 0) {
-              s.y += v;
-              if (s.y > 1.01) {
-                s.y = -0.01;
+              s.y -= v;
+              if (s.y < 0) {
+                s.y = 1.01;
               }
             } else {
               s.x += v;
