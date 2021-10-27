@@ -50,7 +50,7 @@
     <div class="container">
       <div class="content">
         <strong>Mono Koto</strong>
-        <br />Design & Technology Consulting <br /><a
+        <br />Special &amp; unusual technology projects<br /><a
           href="mailto:info@mono-koto.com"
           >info@mono-koto.com</a
         >
@@ -113,11 +113,16 @@
 
             p.fill(color);
             p.circle(s.x * p.width, s.y * p.height, r);
-            s.y += v;
-            if (s.v >= 0 && s.y > 1.01) {
-              s.y = -0.01;
-            } else if (s.v < 0 && s.y < 0) {
-              s.y = 1.01;
+            if (s.v >= 0) {
+              s.y += v;
+              if (s.y > 1.01) {
+                s.y = -0.01;
+              }
+            } else {
+              s.x += v;
+              if (s.x < 0) {
+                s.x = 1.01;
+              }
             }
           }
         };
