@@ -102,7 +102,7 @@
           p.background(bgColor);
           for (let i = 0; i < numStars; i++) {
             const s = stars[i];
-            const r = s.radius * 30;
+            const r = s.radius * 15;
             const v = 0.0001 + s.v / 1500;
             let color;
             if (s.c >= 0) {
@@ -114,20 +114,20 @@
             }
 
             p.fill(color);
-            p.circle(s.x * p.width, s.y * p.height, r);
+            p.circle(s.x * p.width, s.y * p.height, r * 2);
             if (s.v >= 0) {
               s.y -= v;
-              if (s.y < 0) {
-                s.y = 1.01;
+              if (s.y * p.height + r < 0) {
+                s.y = (p.height + r) / p.height;
               }
             } else {
               s.x -= v;
               s.y += v;
-              if (s.x > 1.01) {
-                s.x = -0.01;
+              if (s.x * p.width - r > p.width) {
+                s.x = -r / p.width;
               }
-              if (s.y < 0) {
-                s.y = 1.01;
+              if (s.y * p.height + r < 0) {
+                s.y = (p.height + r) / p.height;
               }
             }
           }
