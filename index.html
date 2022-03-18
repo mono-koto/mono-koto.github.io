@@ -5,12 +5,14 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Mono Koto LLC</title>
+
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;700&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;600&display=swap"
       rel="stylesheet"
     />
+
     <style>
       #bg {
         position: absolute;
@@ -27,12 +29,22 @@
       }
       .content {
         z-index: 10;
-        padding: 10px;
+        padding: 0.5em;
         margin: auto;
-        font-size: 1.2em;
-        filter: drop-shadow(3px 0px 1px #1d3557);
+        font-size: 1.5em;
+        filter: drop-shadow(0px 3px 1px rgba(0, 0, 0, 0.2));
       }
-      .content, a {
+
+      h1 {
+        margin: 0;
+        line-height: 1.3;
+      }
+      p {
+        margin: 0;
+        line-height: 1.5;
+      }
+      .content,
+      a {
         color: #f1faee;
       }
 
@@ -41,7 +53,10 @@
       }
       html,
       body {
-        font-family: "Open Sans", sans-serif;
+        font-family: "Rubik", sans-serif;
+      }
+
+      body {
       }
     </style>
   </head>
@@ -49,23 +64,39 @@
     <div id="bg"></div>
     <div class="container">
       <div class="content">
-        <strong>Mono Koto</strong>
-        <br />Special &amp; unusual technology projects<br /><a
-          href="mailto:info@mono-koto.com"
-          >info@mono-koto.com</a
-        >
+        <h1>Mono Koto</h1>
+        <p>
+          Decentralized protocols &amp; apps<br /><a
+            href="mailto:info@mono-koto.com"
+            >info@mono-koto.com</a
+          >
+        </p>
       </div>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/p5@1.4.0/lib/p5.js"></script>
     <script>
       const container = document.getElementById("bg");
+      function getRandomInt(max) {
+        return Math.floor(Math.random() * max);
+      }
       const s = (p) => {
-        const colors = ["#e63946","#f1faee","#a8dadc","#457b9d","#1d3557"];
+        const palettes = [
+          ["0e131f", "38405f", "59546c", "8b939c", "ff0035"],
+          ["1a1423", "372549", "774c60", "b75d69", "eacdc2"],
+          ["54494b", "f1f7ed", "91c7b1", "b33951", "e3d081"],
+          ["042a2b", "5eb1bf", "54f2f2", "fcfcfc", "f4e04d"],
+          ["240115", "de3c4b", "87f5fb", "2f131e", "cec3c1"],
+          ["f4faff", "dee7e7", "b7adcf", "4f646f", "535657"].reverse(),
+          ["595959", "7f7f7f", "a5a5a5", "cccccc", "f2f2f2"],
+        ];
+        const colors = palettes[getRandomInt(palettes.length)]
+          .reverse()
+          .map((s) => `#${s}`);
         const contrastColor = colors.shift();
         const bgColor = colors.pop();
         const stars = new Array();
-        const maxStars = 800;
-        let numStars = 800;
+        const maxStars = 300 + getRandomInt(500);
+        let numStars = maxStars;
 
         updateNumStars = function () {
           numStars = Math.round(maxStars * Math.min(1, p.width / 1280));
@@ -83,13 +114,15 @@
         }
 
         stars.unshift({
-          radius: Math.random() + .8,
+          radius: Math.random() + 0.8,
           x: Math.random(),
           y: Math.random(),
           alpha: 1,
-          v: Math.random() / -2 - 0.5,
+          v: Math.random(),
+          theta: Math.random() * Math.PI * 2,
           c: -1,
         });
+        console.log(stars[0]);
 
         p.setup = function () {
           p.createCanvas(p.windowWidth, p.windowHeight);
@@ -102,7 +135,7 @@
           p.background(bgColor);
           for (let i = 0; i < numStars; i++) {
             const s = stars[i];
-            const r = s.radius * 15;
+            const r = s.radius * 12;
             const v = 0.0001 + s.v / 1500;
             let color;
             if (s.c >= 0) {
@@ -115,14 +148,14 @@
 
             p.fill(color);
             p.circle(s.x * p.width, s.y * p.height, r * 2);
-            if (s.v >= 0) {
+            if (!s.theta) {
               s.y -= v;
               if (s.y * p.height + r < 0) {
                 s.y = (p.height + r) / p.height;
               }
             } else {
-              s.x -= v;
-              s.y += v;
+              s.x -= v * Math.sin(s.theta);
+              s.y += v * Math.cos(s.theta);
               if (s.x * p.width - r > p.width) {
                 s.x = -r / p.width;
               }
