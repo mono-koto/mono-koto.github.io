@@ -9,167 +9,191 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;600&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Raleway:wght@200;300;400;500;600;700;800;900&display=swap"
       rel="stylesheet"
     />
 
     <style>
-      #bg {
-        position: absolute;
-        top: 0;
-        left: 0;
+      html,
+      body {
+        margin: 0;
+        padding: 0;
+        font-family: "Raleway", sans-serif;
+        background-color: black;
+        font-size: 22px;
+        font-weight: 200;
       }
-      .container {
-        display: flex;
-        position: absolute;
-        top: 0;
-        bottom: 0;
-        right: 0;
-        left: 0;
-      }
-      .content {
-        z-index: 10;
-        padding: 0.5em;
+
+      main {
         margin: auto;
-        font-size: 1.5em;
-        filter: drop-shadow(0px 3px 1px rgba(0, 0, 0, 0.2));
-        text-align: center;
-        max-width: 30em;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: flex-start;
+        height: 100vh;
+      }
+
+      .container {
+        padding: 1em;
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        gap: 2em;
+        justify-content: space-evenly;
+        margin: auto;
+        font-weight: 100;
+      }
+
+      #sketch {
+        width: 100%;
+        min-width: 270px;
+        max-width: 600px;
+        flex: 30%;
+        margin: auto;
+        flex-grow: 0;
+      }
+
+      article {
+        flex: 70%;
+        max-width: 26em;
       }
 
       h1 {
-        margin: 0;
-        line-height: 1.3;
+        font-size: 36px;
+        margin: 0 0 0.5em 0;
+        text-transform: capitalize;
+        font-weight: 500;
       }
+
       p {
-        margin: 0;
+        margin: 0 0 1em 0;
         line-height: 1.5;
       }
-      .content,
+
+      .content {
+        color: white;
+      }
       a {
-        color: #f1faee;
+        color: white;
+        text-decoration: none;
+        font-weight: 500;
+      }
+      a:hover {
+        background-color: white;
+        color: black;
       }
 
       canvas {
         display: block;
       }
-      html,
-      body {
-        font-family: "Rubik", sans-serif;
-      }
-
-      body {
-      }
     </style>
   </head>
   <body>
-    <div id="bg"></div>
-    <div class="container">
-      <div class="content">
-        <h1>Mono Koto</h1>
-        <p>Protocols for next-gen decentralized commerce &amp; finance</p>
-        <p><a href="mailto:info@mono-koto.com">info@mono-koto.com</a></p>
+    <main>
+      <div class="container">
+        <!-- <div style="height: 2000px; background: red">hi</div> -->
+        <div id="sketch"></div>
+        <article>
+          <div class="content">
+            <h1><span>Mono Koto</span></h1>
+            <p>
+              Created by
+              <a href="https://brentfitzgerald.com/">Brent Fitzgerald</a>, Mono
+              Koto is an independent studio combining technical and creative
+              practices to explore new boundaries of human interaction via
+              decentralized economies and blockchain technology.
+            </p>
+            <p><a href="mailto:info@mono-koto.com">info@mono-koto.com</a></p>
+          </div>
+        </article>
       </div>
-    </div>
+    </main>
     <script src="https://cdn.jsdelivr.net/npm/p5@1.4.0/lib/p5.js"></script>
     <script>
-      const container = document.getElementById("bg");
-      function getRandomInt(max) {
-        return Math.floor(Math.random() * max);
+      const framesPerCycle = 6000;
+      let cycleProgress = 0;
+      let container = document.getElementById("sketch");
+      const initialSize = 400;
+      function setup() {
+        createCanvas(initialSize, initialSize).parent("sketch");
+        strokeWeight(0.03);
+        noFill();
+        stroke(255);
+        strokeJoin(BEVEL);
+        windowResized();
       }
-      const s = (p) => {
-        const palettes = [
-          ["0e131f", "38405f", "59546c", "8b939c", "ff0035"],
-          ["1a1423", "372549", "774c60", "b75d69", "eacdc2"],
-          ["54494b", "f1f7ed", "91c7b1", "b33951", "e3d081"],
-          ["042a2b", "5eb1bf", "54f2f2", "fcfcfc", "f4e04d"],
-          ["240115", "de3c4b", "87f5fb", "2f131e", "cec3c1"],
-          ["f4faff", "dee7e7", "b7adcf", "4f646f", "535657"].reverse(),
-          ["595959", "7f7f7f", "a5a5a5", "cccccc", "f2f2f2"],
-        ];
-        const colors = palettes[getRandomInt(palettes.length)]
-          .reverse()
-          .map((s) => `#${s}`);
-        const contrastColor = colors.shift();
-        const bgColor = colors.pop();
-        const stars = new Array();
-        const maxStars = 300 + getRandomInt(500);
-        let numStars = maxStars;
 
-        updateNumStars = function () {
-          numStars = Math.round(maxStars * Math.min(1, p.width / 1280));
-        };
+      function equiTri() {
+        const p1 = 0;
+        const p2 = TWO_PI / 3;
+        const p3 = (2 * TWO_PI) / 3;
+        triangle(sin(p1), cos(p1), sin(p2), cos(p2), sin(p3), cos(p3));
+      }
 
-        for (let i = 0; i < maxStars; i++) {
-          stars.push({
-            radius: Math.random(),
-            x: Math.random(),
-            y: Math.random(),
-            alpha: Math.random(),
-            v: Math.random(),
-            c: Math.floor(Math.random() * colors.length),
-          });
-        }
+      function tri() {
+        const p1 = cycleProgress;
+        const p2 = TWO_PI / 3 + cycleProgress * 1.5;
+        const p3 = (2 * TWO_PI) / 3 + cycleProgress * 2;
+        triangle(sin(p1), cos(p1), sin(p2), cos(p2), sin(p3), cos(p3));
+      }
 
-        stars.unshift({
-          radius: Math.random() + 0.8,
-          x: Math.random(),
-          y: Math.random(),
-          alpha: 1,
-          v: Math.random(),
-          theta: Math.random() * Math.PI * 2,
-          c: -1,
-        });
-        console.log(stars[0]);
+      function tri2(m) {
+        const cycleProgress =
+          (TWO_PI * (((m || 1) * frameCount) % framesPerCycle)) /
+          framesPerCycle;
+        const p1 = cycleProgress;
+        const p2 = TWO_PI / 3 + cycleProgress;
+        const p3 = (2 * TWO_PI) / 3 + cycleProgress;
 
-        p.setup = function () {
-          p.createCanvas(p.windowWidth, p.windowHeight);
-          p.noStroke();
-          p.pixelDensity(1);
-          updateNumStars();
-        };
+        triangle(sin(p1), cos(p1), sin(p2), cos(p2), sin(p3), cos(p3));
 
-        p.draw = function () {
-          p.background(bgColor);
-          for (let i = 0; i < numStars; i++) {
-            const s = stars[i];
-            const r = s.radius * 12;
-            const v = 0.0001 + s.v / 1500;
-            let color;
-            if (s.c >= 0) {
-              color = p.color(colors[s.c]);
-              color.setAlpha(s.alpha * 255);
-            } else {
-              color = p.color(contrastColor);
-              color.setAlpha(s.alpha * 255);
-            }
+        const p4 = (2 * TWO_PI) / 3 - cycleProgress;
+        line(sin(p1), cos(p1), sin(p4), cos(p4));
+        line(sin(p2), cos(p2), sin(p4), cos(p4));
+        line(sin(p3), cos(p3), sin(p4), cos(p4));
+      }
 
-            p.fill(color);
-            p.circle(s.x * p.width, s.y * p.height, r * 2);
-            if (!s.theta) {
-              s.y -= v;
-              if (s.y * p.height + r < 0) {
-                s.y = (p.height + r) / p.height;
-              }
-            } else {
-              s.x -= v * Math.sin(s.theta);
-              s.y += v * Math.cos(s.theta);
-              if (s.x * p.width - r > p.width) {
-                s.x = -r / p.width;
-              }
-              if (s.y * p.height + r < 0) {
-                s.y = (p.height + r) / p.height;
-              }
-            }
-          }
-        };
+      function logo() {
+        drawingContext.shadowBlur = 30;
+        drawingContext.shadowColor = color(255, 255, 255, 100);
+        circle(0, 0, 2);
+        tri2(1);
+        fill(0);
+        circle(0, 0, 1);
+        noFill();
+        circle(0, 0, 1);
 
-        p.windowResized = function () {
-          p.resizeCanvas(p.windowWidth, p.windowHeight);
-          updateNumStars();
-        };
-      };
-      new p5(s, container);
+        push();
+        rotate(PI);
+        scale(0.5, 0.5);
+        strokeWeight(0.06);
+        tri2(-1);
+        pop();
+
+        fill(0);
+        circle(0, 0, 0.5);
+        noFill();
+        circle(0, 0, 0.5);
+
+        push();
+        rotate(PI);
+        scale(0.25, 0.25);
+        strokeWeight(0.12);
+        tri2(1);
+        pop();
+      }
+
+      function draw() {
+        background(0);
+        translate(width / 2, height / 2);
+        scale(width * 0.47, height * 0.47);
+        logo();
+      }
+
+      function windowResized() {
+        const d = Math.min(container.offsetWidth, initialSize);
+        resizeCanvas(d, d);
+      }
     </script>
   </body>
 </html>
