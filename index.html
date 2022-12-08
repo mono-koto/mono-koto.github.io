@@ -86,20 +86,58 @@
       canvas {
         display: block;
       }
+
+      .fade-in,
+      .fade-in-1 {
+        opacity: 1;
+        animation-name: fadeIn;
+        animation-iteration-count: 1;
+        animation-timing-function: ease-in-out;
+        animation-duration: 0.5s;
+      }
+
+      .fade-in-1 {
+        animation-name: fade-in-1;
+        animation-duration: 1.2s;
+      }
+
+      @keyframes fadeIn {
+        0% {
+          opacity: 0;
+        }
+        20% {
+          opacity: 0;
+        }
+
+        100% {
+          opacity: 1;
+        }
+      }
+      @keyframes fade-in-1 {
+        0% {
+          opacity: 0;
+        }
+        70% {
+          opacity: 0;
+        }
+        100% {
+          opacity: 1;
+        }
+      }
     </style>
   </head>
   <body>
     <main>
       <div class="container">
         <!-- <div style="height: 2000px; background: red">hi</div> -->
-        <div id="sketch"></div>
+        <div id="sketch" class="fade-in"></div>
         <article>
-          <div class="content">
+          <div class="content fade-in-1">
             <h1><span>Mono Koto</span></h1>
             <p>
               Created by
               <a href="https://brentfitzgerald.com/">Brent Fitzgerald</a>, Mono
-              Koto is an independent studio combining technical and creative
+              Koto is an independent technology studio combining and creative
               practices to explore new boundaries of human interaction via
               decentralized economies and blockchain technology.
             </p>
