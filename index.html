@@ -87,39 +87,22 @@
         display: block;
       }
 
-      .fade-in,
-      .fade-in-1 {
+      .fade-in {
         opacity: 1;
         animation-name: fadeIn;
         animation-iteration-count: 1;
         animation-timing-function: ease-in-out;
-        animation-duration: 0.5s;
-      }
-
-      .fade-in-1 {
-        animation-name: fade-in-1;
-        animation-duration: 1.2s;
+        animation-duration: 0.4s;
       }
 
       @keyframes fadeIn {
         0% {
           opacity: 0;
         }
-        20% {
+        /* 40% {
           opacity: 0;
-        }
+        } */
 
-        100% {
-          opacity: 1;
-        }
-      }
-      @keyframes fade-in-1 {
-        0% {
-          opacity: 0;
-        }
-        70% {
-          opacity: 0;
-        }
         100% {
           opacity: 1;
         }
@@ -128,11 +111,11 @@
   </head>
   <body>
     <main>
-      <div class="container">
+      <div class="container fade-in">
         <!-- <div style="height: 2000px; background: red">hi</div> -->
-        <div id="sketch" class="fade-in"></div>
+        <div id="sketch"></div>
         <article>
-          <div class="content fade-in-1">
+          <div class="content">
             <h1><span>Mono Koto</span></h1>
             <p>
               Created by
