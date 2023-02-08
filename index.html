@@ -23,7 +23,47 @@
         margin: 0;
         padding: 0;
         font-family: "Raleway", sans-serif;
-        background-color: black;
+
+        background: hsla(205, 34%, 40%, 1);
+
+        background: linear-gradient(
+          90deg,
+          hsla(205, 34%, 40%, 1) 0%,
+          hsla(347, 52%, 36%, 1) 100%
+        );
+
+        background: -moz-linear-gradient(
+          90deg,
+          hsla(205, 34%, 40%, 1) 0%,
+          hsla(347, 52%, 36%, 1) 100%
+        );
+
+        background: -webkit-linear-gradient(
+          90deg,
+          hsla(205, 34%, 40%, 1) 0%,
+          hsla(347, 52%, 36%, 1) 100%
+        );
+
+        filter: progid: DXImageTransform.Microsoft.gradient( startColorstr="#436C89", endColorstr="#8B2C40", GradientType=1 );
+
+        /* background-color: darkred; */
+        /* background-color: #4158d0;
+        background-image: linear-gradient(
+          43deg,
+          #4158d0 0%,
+          #c850c0 46%,
+          #ffcc70 100%
+        ); */
+        /* background-image: linear-gradient(
+          270deg,
+          rgba(90, 92, 106, 1) 0%,
+          rgba(32, 45, 58, 1) 100%
+        ); */
+        /* background-image: radial-gradient(
+          circle farthest-corner at 10% 20%,
+          rgba(90, 92, 106, 1) 0%,
+          rgba(32, 45, 58, 1) 100%
+        ); */
         font-size: 22px;
         font-weight: 200;
       }
@@ -49,16 +89,14 @@
       }
 
       #sketch {
-        width: 100%;
-        min-width: 270px;
-        max-width: 600px;
-        flex: 30%;
+        width: 30%;
+      }
+
+      canvas {
         margin: auto;
-        flex-grow: 0;
       }
 
       article {
-        flex: 70%;
         max-width: 26em;
       }
 
@@ -75,15 +113,15 @@
       }
 
       .content {
-        color: white;
+        color: #ddd;
       }
       a {
-        color: white;
+        color: #ddd;
         text-decoration: none;
         font-weight: 500;
       }
       a:hover {
-        background-color: white;
+        background-color: #ddd;
         color: black;
       }
 
@@ -108,6 +146,47 @@
           opacity: 1;
         }
       }
+
+      .logos {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        gap: 1em;
+        /* justify-content: space-between; */
+        /* align-items: center;
+        justify-items: center;
+        align-content: center; */
+        margin: 1em auto;
+        padding: 0 5px;
+      }
+
+      @keyframes logoFadeIn {
+        0% {
+          opacity: 0.3;
+        }
+
+        100% {
+          opacity: 1;
+        }
+      }
+
+      .logos a {
+        display: block;
+        opacity: 0.3;
+      }
+      .logos a:hover {
+        background-color: transparent;
+        animation-name: logoFadeIn;
+        animation-iteration-count: 1;
+        animation-timing-function: ease-in-out;
+        animation-duration: 0.2s;
+        opacity: 1;
+      }
+      .logos img {
+        display: block;
+        height: 40px;
+        width: 40px;
+      }
     </style>
   </head>
   <body>
@@ -121,28 +200,59 @@
             <p>
               Created by
               <a href="https://brentfitzgerald.com/">Brent Fitzgerald</a>, Mono
-              Koto is an independent experimental studio focused on open and
+              Koto is an experimental technology studio focused on open and
               permissionless systems, programmable money, and emerging human
               experiences.
+              <a href="mailto:info@mono-koto.com">info@mono-koto.com</a>
             </p>
-            <p><a href="mailto:info@mono-koto.com">info@mono-koto.com</a></p>
+            <p></p>
+            <div class="logos">
+              <a href="https://citadao.io/" title="CitaDAO"
+                ><img src="collabs/citadao.svg" style="scale: 0.9"
+              /></a>
+              <a href="https://olympusdao.finance/" title="OlympusDAO Incubator"
+                ><img src="collabs/olympus.svg" style="scale: 0.9"
+              /></a>
+              <a href="https://minaprotocol.com/" title="Mina Protocol"
+                ><img src="collabs/mina.svg" style="scale: 1.1"
+              /></a>
+              <a href="https://nervous.net/" title="Nervous"
+                ><img src="collabs/nervous.svg"
+              /></a>
+              <a href="https://brale.xyz" title="Brale"
+                ><img src="collabs/brale.svg" style="scale: 0.9"
+              /></a>
+              <a href="https://munko.io/" title="Munko"
+                ><img
+                  src="collabs/munko.svg"
+                  style="scale: 1.1; translate: 0 2px"
+              /></a>
+              <a href="https://galactic.io/" title="General Galactic"
+                ><img src="collabs/general-galactic.svg" style="scale: 1.2"
+              /></a>
+              <a href="https://mint.broadside.wtf/" title="Broadside"
+                ><img src="collabs/broadside.svg"
+              /></a>
+            </div>
           </div>
         </article>
       </div>
     </main>
     <script src="https://cdn.jsdelivr.net/npm/p5@1.4.0/lib/p5.js"></script>
     <script>
-      const framesPerCycle = 6000;
+      const framesPerCycle = 4000;
       let cycleProgress = 0;
       let container = document.getElementById("sketch");
       const initialSize = 400;
+      const STROKE_WIDTH = 0.01;
       function setup() {
         createCanvas(initialSize, initialSize).parent("sketch");
-        strokeWeight(0.03);
+        strokeWeight(STROKE_WIDTH);
         noFill();
         stroke(255);
         strokeJoin(BEVEL);
         windowResized();
+        frameRate(45);
       }
 
       function equiTri() {
@@ -176,37 +286,44 @@
       }
 
       function logo() {
-        drawingContext.shadowBlur = 30;
-        drawingContext.shadowColor = color(255, 255, 255, 100);
+        // drawingContext.shadowBlur = 10;
+        // drawingContext.shadowColor = color(255, 255, 255, 255);
         circle(0, 0, 2);
         tri2(1);
+        drawingContext.save();
+        drawingContext.globalCompositeOperation = "destination-out";
         fill(0);
         circle(0, 0, 1);
+        drawingContext.restore();
         noFill();
         circle(0, 0, 1);
 
         push();
         rotate(PI);
         scale(0.5, 0.5);
-        strokeWeight(0.06);
+        strokeWeight(STROKE_WIDTH * 2);
         tri2(-1);
         pop();
 
+        drawingContext.save();
+        drawingContext.globalCompositeOperation = "destination-out";
         fill(0);
         circle(0, 0, 0.5);
+        drawingContext.restore();
+
         noFill();
         circle(0, 0, 0.5);
 
         push();
         rotate(PI);
         scale(0.25, 0.25);
-        strokeWeight(0.12);
+        strokeWeight(STROKE_WIDTH * 4);
         tri2(1);
         pop();
       }
 
       function draw() {
-        background(0);
+        clear();
         translate(width / 2, height / 2);
         scale(width * 0.47, height * 0.47);
         logo();
@@ -214,6 +331,7 @@
 
       function windowResized() {
         const d = Math.min(container.offsetWidth, initialSize);
+        console.log(container.offsetWidth, initialSize);
         resizeCanvas(d, d);
       }
     </script>
