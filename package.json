@@ -5,18 +5,20 @@
   "author": "burnto <brent@mono-koto.com>",
   "license": "MIT",
   "scripts": {
-    "start": "parcel ./src/index.html",
-    "prebuild-dev": "shx rm -rf dist/*",
-    "build-dev": "parcel build ./src/index.html --no-optimize --public-url ./",
-    "prebuild": "shx rm -rf dist/*",
-    "build": "parcel build ./src/index.html --public-url ./ && cp src/CNAME dist/",
+    "dev": "vite ./src",
+    "build": "tsc && vite build ./src && cp src/CNAME dist/",
+    "preview": "vite preview ./src",
+    "clean": "shx rm -rf dist/*",
     "push-gh-pages": "push-dir --dir=dist --branch=gh-pages --cleanup --verbose",
-    "deploy": "yarn prebuild && yarn build && yarn push-gh-pages"
+    "deploy": "yarn clean && yarn build && yarn push-gh-pages"
   },
   "devDependencies": {
-    "parcel": "^2.8.3",
+    "autoprefixer": "^10.4.14",
+    "postcss": "^8.4.25",
     "push-dir": "^0.4.1",
-    "shx": "^0.3.4"
+    "tailwindcss": "^3.3.2",
+    "typescript": "^5.1.6",
+    "vite": "^4.4.1"
   },
   "staticFiles": {
     "staticPath": [
