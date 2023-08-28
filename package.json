@@ -6,7 +6,7 @@
   "license": "MIT",
   "scripts": {
     "dev": "vite ./src",
-    "build": "mkdir -p dist && vite build ./src && cp src/CNAME dist/",
+    "build": "mkdir -p dist && vite build ./src && cp src/CNAME dist/ && cp -r src/dist/* ./dist/",
     "preview": "vite preview ./src",
     "clean": "shx rm -rf dist/*",
     "push-gh-pages": "push-dir --dir=dist --branch=gh-pages --cleanup --verbose",
