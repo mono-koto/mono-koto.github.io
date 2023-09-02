@@ -18,18 +18,21 @@
     />
 
     <link rel="stylesheet" href="style.css" />
-
-    <style></style>
   </head>
   <body>
-    <main class="flex flex-col container">
+    <main class="relative">
       <article>
-        <div class="content flex flex-col gap-1 text-xl p-8">
+        <div class="content flex flex-col gap-1 text-xl p-8 text-white">
           <h1 class="text-4xl">Mono Koto</h1>
-          <p>Applied technology studio for web3</p>
+          <p>Applied technology studio</p>
           <p><a href="mailto:info@mono-koto.com">info@mono-koto.com</a></p>
         </div>
       </article>
+      <canvas
+        class="w-screen h-screen block absolute top-0 left-0 -z-10"
+        id="canvas"
+      ></canvas>
     </main>
+    <script type="module" src="script.ts"></script>
   </body>
 </html>
