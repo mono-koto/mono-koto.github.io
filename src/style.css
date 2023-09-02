@@ -2,11 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-html,
-body {
-  /* @apply bg-stone-200 text-stone-900; */
-}
-
 a {
-  @apply hover:bg-stone-800 hover:text-yellow-400 transition-colors;
+  @apply hover:bg-stone-800 hover:text-white transition-colors;
 }

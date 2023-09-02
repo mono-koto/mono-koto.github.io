@@ -1,6 +1,6 @@
 import * as THREE from "three";
 
-import f from "./frags/calibrate.glsl?raw";
+import f from "./frags/05.glsl?raw";
 
 const vertexShader = `
 precision mediump float; 

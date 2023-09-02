@@ -7,7 +7,6 @@ vec3 palette(in float t) {
     vec3 b = vec3(0.388, 0.408, -0.202);
     vec3 c = vec3(1.988, 0.771, 1.148);
     vec3 d = vec3(3.138, 1.118, -2.802);
-    // return vec3(1.0, 1.0, 1.0);
     return palette(t, a, b, c, d);
 
 }
@@ -18,7 +17,6 @@ vec3 palette2(in float t) {
     vec3 c = vec3(1.000, 1.000, 1.000);
     vec3 d = vec3(0.000, 0.333, 0.667);
     return palette(t, a, b, c, d);
-
 }
 
 void mainImage(out vec4 fragColor, in vec2 fragCoord) {

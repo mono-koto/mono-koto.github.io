@@ -3,7 +3,7 @@ module.exports = {
   content: ["./src/index.html", "./src/**/*.{js,ts,jsx,tsx}"],
   theme: {
     fontFamily: {
-      sans: ["EB Garamond", "system"],
+      sans: ["IBM Plex Mono", "monospace"],
     },
     extend: {},
   },
