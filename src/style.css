@@ -2,6 +2,29 @@
 @tailwind components;
 @tailwind utilities;
 
+body {
+  @apply bg-zinc-200 text-zinc-800 dark:bg-zinc-800 dark:text-zinc-200;
+  @apply leading-loose;
+}
+
+h1 {
+  @apply font-bold lowercase;
+}
+
 a {
-  @apply hover:bg-stone-800 hover:text-white transition-colors;
+  @apply transition-colors rounded-md px-[0.3rem] py-[0.05rem];
+  @apply bg-zinc-300 text-zinc-800 hover:bg-zinc-400 hover:text-zinc-900;
+  @apply dark:bg-zinc-700 dark:text-zinc-200 dark:hover:bg-zinc-600 dark:hover:text-zinc-100;
+}
+
+.content {
+  @apply space-y-8 p-4 max-w-md;
+}
+
+.content a {
+  @apply whitespace-nowrap;
+}
+
+.content span {
+  @apply opacity-20 inline-block;
 }
