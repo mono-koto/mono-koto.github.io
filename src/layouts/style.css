@@ -1,0 +1,19 @@
+html {
+  font-size: 18px;
+}
+
+body {
+  @apply bg-stone-100 text-stone-700;
+}
+
+h1 {
+  @apply uppercase font-medium;
+}
+
+h2 {
+  @apply text-stone-500 italic;
+}
+
+a {
+  @apply bg-stone-200 transition-colors hover:bg-stone-300;
+}

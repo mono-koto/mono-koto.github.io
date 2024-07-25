@@ -1,0 +1,97 @@
+---
+import Layout from "../layouts/Layout.astro";
+
+const projects = [
+  {
+    name: "Basejump",
+    link: "https://www.basejump.xyz/",
+  },
+  {
+    name: "Garden Labs",
+    link: "https://www.gardenlabs.xyz/",
+  },
+  {
+    name: "PYUSD.to",
+    link: "https://pyusd.to",
+  },
+  {
+    name: "PYUSD.pizza",
+    link: "https://pyusd.pizza",
+  },
+  {
+    name: "PYUSD",
+    link: "https://www.paypal.com/us/digital-wallet/manage-money/crypto/pyusd",
+  },
+  {
+    name: "Brale",
+    link: "https://brale.xyz/",
+  },
+  {
+    name: "Broadside",
+    link: "https://br0ads1de.com/",
+  },
+  {
+    name: "Nervous",
+    link: "https://www.nervous.net/",
+  },
+  {
+    name: "Munko",
+    link: "https://opensea.io/collection/munko-by-david-choe",
+  },
+  {
+    name: "Mini Melties",
+    link: "https://www.minimelties.com/",
+  },
+  {
+    name: "General Galactic",
+    link: "https://generalgalactic.eth.limo/",
+  },
+  {
+    name: "Citadao",
+    link: "https://citadao.io",
+  },
+];
+---
+
+<Layout
+  title="Mono Koto"
+  description="We help teams understand and creatively leverage new technology to build remarkable new products."
+>
+  <article class="box">
+    <div class="space-y-[1.5rem]">
+      <div>
+        <h1>Mono Koto</h1>
+      </div>
+
+      <p>Your emerging tech partner.</p>
+      <p>
+        From the Japanese <strong>mono</strong> (object) and{" "}
+        <strong>koto</strong> (idea), <span class="">Mono Koto</span>{" "}
+        creates meaningful artifacts from visionary ideas.
+      </p>
+      <p>
+        We help teams understand and creatively leverage new technology to build
+        remarkable new products.
+      </p>
+
+      <div>
+        <p>Recent projects and partnerships:</p>
+        <div class="flex flex-wrap gap-x-2 gap-y-1">
+          {
+            projects.map((project) => (
+              <a class="px-1 leading-normal" href={project.link}>
+                {project.name}
+              </a>
+            ))
+          }
+        </div>
+      </div>
+      <div>
+        <p>
+          Want to talk projects?{" "}
+          <a href="mailto:info@mono-koto.com">info@mono-koto.com</a>
+        </p>
+      </div>
+    </div>
+  </article>
+</Layout>
