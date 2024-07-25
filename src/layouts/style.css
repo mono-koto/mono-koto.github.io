@@ -3,7 +3,7 @@ html {
 }
 
 body {
-  @apply bg-stone-100 text-stone-700;
+  @apply bg-stone-200 text-stone-700;
 }
 
 h1 {
@@ -15,5 +15,5 @@ h2 {
 }
 
 a {
-  @apply bg-stone-200 transition-colors hover:bg-stone-300;
+  @apply text-stone-600 hover:text-stone-900 bg-stone-100 rounded px-1 transition-colors hover:bg-green-200;
 }
