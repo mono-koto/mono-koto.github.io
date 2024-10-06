@@ -28,7 +28,12 @@ const description = "Your partner in emerging tech";
         <div class="flex flex-wrap gap-x-2 gap-y-1">
           {
             projects.map((project) => (
-              <a class="px-1 leading-normal" href={project.link}>
+              <a
+                class="px-1 leading-normal"
+                href={project.link}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
                 {project.name}
               </a>
             ))
