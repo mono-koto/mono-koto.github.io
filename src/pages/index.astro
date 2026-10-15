@@ -1,9 +1,7 @@
 ---
 import Layout from "../layouts/Layout.astro";
 
-import projects from "./projects.json";
-
-const description = "Your partner in emerging tech";
+const description = "The consulting practice of Brent Fitzgerald";
 ---
 
 <Layout title="MONO KOTO" description={description}>
@@ -13,7 +11,10 @@ const description = "Your partner in emerging tech";
         <h1>Mono Koto</h1>
       </div>
 
-      <p>{description}</p>
+      <p>
+        Mono Koto is the consulting practice of{" "}
+        <a href="https://brentfitzgerald.com">Brent Fitzgerald</a>.
+      </p>
 
       <p>
         From the Japanese <strong>mono</strong> (object thing) and{" "}
@@ -23,26 +24,14 @@ const description = "Your partner in emerging tech";
         creates digital objects with conceptual heft.
       </p>
 
-      <div>
-        <p>Recent collabs and projects:</p>
-        <div class="flex flex-wrap gap-x-2 gap-y-1">
-          {
-            projects.map((project) => (
-              <a
-                class="px-1 leading-normal"
-                href={project.link}
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                {project.name}
-              </a>
-            ))
-          }
-        </div>
-      </div>
+      <p>
+        For current work and background, see{" "}
+        <a href="https://brentfitzgerald.com">brentfitzgerald.com</a>.
+      </p>
+
       <div>
         <p>
-          Ready to join forces?{" "}
+          Get in touch:{" "}
           <a href="mailto:info@mono-koto.com">info@mono-koto.com</a>
         </p>
       </div>
